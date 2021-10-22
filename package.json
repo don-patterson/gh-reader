@@ -1,0 +1,40 @@
+{
+  "name": "@deek80/gh-reader",
+  "version": "0.1.0",
+  "description": "Read data from github repos, through the API or the raw pages.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "debug": "NODE_OPTIONS='--experimental-vm-modules --inspect-brk' jest --runInBand"
+  },
+  "type": "module",
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "react": "^17.0.2"
+  },
+  "jest": {
+    "transform": {}
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": false,
+    "trailingComma": "es5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deek80/gh-reader.git"
+  },
+  "keywords": [
+    "github",
+    "reader"
+  ],
+  "author": "Don Patterson <donald.patterson@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deek80/gh-reader/issues"
+  },
+  "homepage": "https://github.com/deek80/gh-reader#readme"
+}

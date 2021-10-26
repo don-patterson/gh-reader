@@ -19,14 +19,15 @@ export class Cache {
     this.items = new Map();
   }
 
-  _truncate = async () => {
-    while (this.items.size >= this.maxSize) {
-      this.items.delete(this.items.keys().next().value);
+  _clean = () => {
+    while (this.items.size > this.maxSize) {
+      const keyToDelete = this.items.keys().next().value;
+      this.items.delete(keyToDelete);
     }
   };
 
   set = (key, value) => {
-    this._truncate();
+    setTimeout(this._clean, 0);
     this.items.set(key, {timestamp: now(), value});
     return value;
   };

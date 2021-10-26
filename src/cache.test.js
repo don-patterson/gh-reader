@@ -1,6 +1,8 @@
 import {beforeEach, describe, expect, jest, it} from "@jest/globals";
 import {Cache} from "./cache";
 
+const flushEvents = () => new Promise(resolve => setTimeout(resolve, 0));
+
 describe("cache", () => {
   let cache, fetchNew;
 
@@ -22,8 +24,9 @@ describe("cache", () => {
     expect(await cache.get("b")).toBe(2);
   });
 
-  it("removes the oldest values when you surpass maxSize", async () => {
+  it("removes the oldest values when you surpass max size", async () => {
     cache.set("d", 4);
+    await flushEvents(); // max size cleanup happens async
     expect(cache.items.size).toBe(3);
     expect(await cache.get("a")).toBe("default!");
   });

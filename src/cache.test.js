@@ -20,6 +20,13 @@ describe("cache", () => {
     expect(cache.expiryMinutes).toBe(15);
   });
 
+  it("has working defaults", () => {
+    cache = new Cache();
+    expect(cache).not.toBeNull();
+    expect(cache.maxSize).toBe(15);
+    expect(cache.expiryMinutes).toBe(15);
+  });
+
   it("actually remembers the values", async () => {
     expect(await cache.get("b")).toBe(2);
   });

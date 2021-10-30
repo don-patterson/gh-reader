@@ -1,7 +1,7 @@
 const now = () => new Date().getTime() / 1000;
 
-const minutesSince = unixTimestamp => {
-  return Math.floor((now() - unixTimestamp) / 60);
+const minutesSince = timestamp => {
+  return Math.floor((now() - timestamp) / 60);
 };
 
 export class Cache {
@@ -12,7 +12,11 @@ export class Cache {
    * app from spamming github while you click back and forth, so it
    * hasn't been really tested under demanding circumstances.
    */
-  constructor({maxSize = 15, expiryMinutes = 15, defaultFetch = () => null}) {
+  constructor({
+    maxSize = 15,
+    expiryMinutes = 15,
+    defaultFetch = () => null,
+  } = {}) {
     this.maxSize = maxSize;
     this.expiryMinutes = expiryMinutes;
     this.defaultFetch = defaultFetch;

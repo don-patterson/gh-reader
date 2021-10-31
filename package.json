@@ -1,19 +1,17 @@
 {
   "name": "@deek80/gh-reader",
   "version": "0.1.0",
-  "description": "Read data from github repos, through the API or the raw pages.",
+  "description": "Get github contents through the API.",
   "main": "src/index.js",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "format": "prettier --write src",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --silent",
     "debug": "NODE_OPTIONS='--experimental-vm-modules --inspect-brk' jest --runInBand"
   },
   "type": "module",
   "devDependencies": {
     "jest": "^27.0.6",
     "prettier": "^2.4.1"
-  },
-  "dependencies": {
-    "react": "^17.0.2"
   },
   "jest": {
     "transform": {}

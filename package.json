@@ -1,6 +1,6 @@
 {
   "name": "@deek80/gh-reader",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Get github contents through the API.",
   "main": "src/index.js",
   "scripts": {

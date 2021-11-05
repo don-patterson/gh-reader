@@ -4,17 +4,28 @@
   "description": "Get github contents through the API.",
   "main": "src/index.js",
   "scripts": {
-    "format": "prettier --write src",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --silent",
-    "debug": "NODE_OPTIONS='--experimental-vm-modules --inspect-brk' jest --runInBand"
+    "format": "prettier --write src package.json",
+    "test": "jest --silent"
   },
   "type": "module",
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-jest": "^27.3.1",
     "jest": "^27.0.6",
     "prettier": "^2.4.1"
   },
-  "jest": {
-    "transform": {}
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
   },
   "prettier": {
     "arrowParens": "avoid",

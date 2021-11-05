@@ -23,20 +23,20 @@ export class Cache {
     this.items = new Map();
   }
 
-  _clean = () => {
+  _clean() {
     while (this.items.size > this.maxSize) {
       const keyToDelete = this.items.keys().next().value;
       this.items.delete(keyToDelete);
     }
-  };
+  }
 
-  set = (key, value) => {
-    setTimeout(this._clean, 0);
+  set(key, value) {
+    setTimeout(this._clean.bind(this), 0);
     this.items.set(key, {timestamp: now(), value});
     return value;
-  };
+  }
 
-  get = async (key, fetchLatest = this.defaultFetch) => {
+  async get(key, fetchLatest = this.defaultFetch) {
     const cached = this.items.get(key);
     if (
       cached === undefined ||
@@ -45,5 +45,5 @@ export class Cache {
       return this.set(key, await fetchLatest(key));
     }
     return cached.value;
-  };
+  }
 }

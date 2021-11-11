@@ -1,5 +1,5 @@
 import {beforeEach, describe, expect, jest, it} from "@jest/globals";
-import {getContents} from "./api";
+import {Repo} from "./api";
 
 global.fetch = jest.fn();
 
@@ -14,20 +14,26 @@ const mockFetch = ({json = "", ok = true} = {}) => {
 };
 
 describe("api", () => {
+  let repo;
+
   beforeEach(() => {
     global.fetch.mockReset();
+    repo = new Repo("user/repo");
   });
 
-  it("mock success works", async () => {
+  it("successful fetch returns response", async () => {
     mockFetch({json: "success"});
-    const {limits, response} = await getContents("user", "repo", "success");
-    expect(limits).toEqual({remaining: 10});
+    const response = await repo.ls("directory");
+    expect(repo.limits).toEqual({remaining: 10});
     expect(response).toBe("success");
+    expect(global.fetch).toHaveBeenCalledWith(
+      "https://api.github.com/repos/user/repo/contents/directory"
+    );
   });
 
-  it("mock failure works", async () => {
+  it("failed fetch returns null", async () => {
     mockFetch({ok: false});
-    const {response} = await getContents("user", "repo", "error");
+    const response = await repo.ls("failure");
     expect(response).toBeNull();
   });
 });

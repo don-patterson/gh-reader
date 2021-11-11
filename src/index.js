@@ -1,1 +1,1 @@
-export {getContents} from "./api";
+export {Repo} from "./api";

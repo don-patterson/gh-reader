@@ -1,10 +1,9 @@
-import {Cache} from "./cache";
+import {File} from "./file";
 
 const GITHUB_URL = "https://api.github.com";
 
 class Repo {
   constructor(location) {
-    this.cache = new Cache();
     this.location = location;
     this.limits = {
       limit: 0,
@@ -44,18 +43,19 @@ class Repo {
   }
 
   async ls(path) {
-    const url = `${GITHUB_URL}/repos/${this.location}/contents/${path}`;
-    return await this.cache.get(url, this._callApi);
-  }
+    const contents = await this._callApi(
+      `${GITHUB_URL}/repos/${this.location}/contents/${path}`
+    );
 
-  async download(file) {
-    /* probably should move this somewhere else */
-    const response = await fetch(file.download_url);
-    if (!response.ok) {
-      console.error("Failed to fetch url:", file.download_url);
+    if (contents === null) {
       return null;
     }
-    return response.text();
+
+    if (Array.isArray(contents)) {
+      return contents.map(file => new File(file));
+    }
+
+    return new File(contents);
   }
 }
 

@@ -2,9 +2,13 @@
 
 Get files from Github in Javascript
 
-This is a simple wrapper around `fetch` which gets and caches responses
-from anonymous GitHub API calls. If there's any interest, I could make
-it a little more robust and/or configurable.
+This is a simple wrapper around `fetch` which gets file or directory
+listings from GitHub via anonymous API calls. There's reasonable
+HTTP caching in GitHub already (60s on any directory or file listing)
+and the ratelimit is 60 calls (i.e. fresh / cache miss) per hour.
+
+The returned File objects can have their text/json/etc content downloaded
+from the corresponding raw.githubusercontent site.
 
 Example:
 
@@ -13,8 +17,11 @@ const repo = new Repo("deek80/gh-reader");
 const srcFiles = await repo.ls("src");
 // and `srcFiles` looks like:
 [
-  {name: "api.js", download_url: "...", type: "file"},
-  {name: "index.js", download_url: "...", type: "file"},
+  File({name: "api.js", type: "file", path: "src/api.js", ...}),
+  File({name: "index.js", type: "file", path: "src/index.js", ...}),
   ...
 ]
+
+const content = await srcFiles[0].download();
+// `download` gets text by default
 ```

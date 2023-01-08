@@ -13,7 +13,7 @@ from the corresponding raw.githubusercontent site.
 Example:
 
 ```js
-const repo = new Repo("deek80/gh-reader");
+const repo = new Repo("don-patterson/gh-reader");
 const srcFiles = await repo.ls("src");
 // and `srcFiles` looks like:
 [
